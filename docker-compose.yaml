@@ -3,7 +3,7 @@ version: '3.3'
 
 
 services:
-        synapse:
+   synapse:
         image: matrixdotorg/synapse:latest
         restart: always
         ports: 
