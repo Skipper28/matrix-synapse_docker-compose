@@ -1,0 +1,27 @@
+version: '3.3'
+
+
+
+services:
+        synapse:
+        image: matrixdotorg/synapse:latest
+        restart: always
+        ports: 
+           - '8008:8008'
+        volumes:
+           - ./synapse/data/:/data/
+        links:
+           - postgres
+
+  postgres:
+        image: postgres:latest
+        ports:
+           - '5432:5432'
+        restart: always
+        environment:
+            POSTGRES_USER: "matrix"
+            POSTGRES_PASSWORD: "matrix"
+            POSTGRES_DB: "synapse"
+            POSTGRES_INITDB_ARGS: "--encoding='UTF8' --lc-collate='C' --lc-ctype='C'"
+        volumes:
+            - ./synapse/database/:/var/lib/postgresql/data/
