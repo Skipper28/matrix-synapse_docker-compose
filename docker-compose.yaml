@@ -4,7 +4,7 @@ services:
   synapse:
         image: matrixdotorg/synapse:latest
         restart: always
-        ports: 
+        ports:
            - '8008:8008'
         volumes:
            - ./synapse/data/:/data/
@@ -23,3 +23,11 @@ services:
             POSTGRES_INITDB_ARGS: "--encoding='UTF8' --lc-collate='C' --lc-ctype='C'"
         volumes:
             - ./synapse/database/:/var/lib/postgresql/data/
+
+  element:
+         image: vectorim/element-web:latest
+         ports:
+            - '80:80'
+         restart: unless-stopped
+         volumes:
+               - ./element-config.json:/app/config.json
